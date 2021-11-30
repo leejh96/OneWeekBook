@@ -1,45 +1,36 @@
-const mongoose = require('mongoose');
+const User = ((sequelize, Sequelize) => {
+    sequelize.define('user', {
+        username: {
+            type: Sequelize.STRING(30),
+            allwoNull: false,
+        },
+        userid: {
+            type: Sequelize.STRING(30),
+            allwoNull: false,
+            unique: true
+        },
+        password: {
+            type: Sequelize.STRING(100),
+            allwoNull: false,
+            unique: true
+        },
+        email: {
+            type: Sequelize.STRING(50),
+            allwoNull: false,
+            unique: true,
+        },
+        state: {
+            type: Sequelize.INTEGER(2),
+            defaultValue: 0  //0은 회원, 1은 탈퇴회원,
+        },
+        status: {
+            type: Sequelize.INTEGER(2),
+            defaultValue: 0 //0은 일반회원, 1은 관리자,
+        }
+    }, {
 
-const userSchema = new mongoose.Schema({
-    username: {
-        type: String,
-        required: true,
-    },
-    email: {
-        type: String,
-        required: true,
-        unique: true,
-        lowercase: true,
-    },
-    password: {
-        type: String,
-        required: true,
-    },
-    nickname: {
-        type: String,
-        default: `랜덤${Math.floor(Math.random * 1000)}`,
-        required: true
-    },
-    state: {
-        type: Number,
-        required: true,
-        default: 0 // 0:회원, 1:회원탈퇴한 회원
-    },
-    status: {
-        type: Number,
-        required: true,
-        default: 0 // 0: 일반회원 1: 관리자
-    },
-    createTime: {
-        type: Date,
-        required: true,
-        default: Date.now
-    },
-    modifyTime: {
-        type: Date,
-        required: true,
-        default: Date.now
-    }
-});
+    });
 
-module.exports = userSchema;
+})
+
+module.exports = User;

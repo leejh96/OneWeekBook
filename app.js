@@ -1,17 +1,10 @@
 const express = require('express');
-const mongoose = require('mongoose');
 const userRouter = require('./routes/user');
 const bookRouter = require('./routes/book');
 const app = express();
-
+const db = require('./models')
 require('dotenv').config();
-mongoose.connect(process.env.MONGO_URI)
-    .then(() => {
-        console.log('mongoDB connected ...')
-    })
-    .catch((err) => {
-        console.error(err);
-    })
+db.sequelize.sync();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
