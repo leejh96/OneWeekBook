@@ -1,5 +1,1 @@
 # OneWeekBook
-
-## FrontEnd
-
-## BackEnd
